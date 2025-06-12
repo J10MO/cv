@@ -133,8 +133,8 @@ const Portfolio = () => {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/20 backdrop-blur-xl border-b border-white/10 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      <nav className="fixed top-0 w-full bg-black/20 backdrop-blur-xl  border-b border-white/10 z-50">
+        <div className="max-w-7xl  mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
               Jasem Mohammed
@@ -142,7 +142,7 @@ const Portfolio = () => {
             <div className="hidden md:flex space-x-8">
               {['home', 'about', 'projects', 'contact'].map((section) => (
                 <button
-                  key={section}
+                  key={section} 
                   onClick={() => scrollToSection(section)}
                   className={`capitalize relative py-2 px-4 rounded-full transition-all duration-300 hover:bg-white/10 ${
                     activeSection === section 
@@ -162,7 +162,7 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center px-6 z-10">
+      <section id="home" className="mt-22 relative min-h-screen flex items-center justify-center px-6 z-10">
         <div className={`text-center transform transition-all duration-1500 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
         }`}>
