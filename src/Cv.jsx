@@ -1012,6 +1012,7 @@
 
 
 
+
 import React from 'react';
 import { Mail, Phone, MapPin, Github, Linkedin, Calendar, ExternalLink, Award, Download } from 'lucide-react';
 
@@ -1074,11 +1075,11 @@ const ProfessionalCV = () => {
 
   const skills = {
     "Programming Languages": ["JavaScript", "TypeScript", "HTML5", "CSS3", "SQL", "Python"],
-    "Frontend": ["React", "Vue.js", "Angular", "Tailwind CSS", "Bootstrap", "Redux", "Next.js"],
-    "Backend": ["Node.js", "Express.js", "Laravel", "Django", "Spring Boot", "RESTful APIs", "GraphQL"],
+    "Frontend Technologies": ["React", "Vue.js", "Angular", "Tailwind CSS", "Bootstrap", "Redux", "Next.js"],
+    "Backend Technologies": ["Node.js", "Express.js", "Laravel", "Django", "Spring Boot", "RESTful APIs", "GraphQL"],
     "Databases": ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase"],
-    "Tools & Technologies": ["Git", "Docker", "AWS", "CI/CD", "Jest", "Webpack", "Nginx"],
-    "Other Skills": ["Agile/Scrum", "Microservices", "JWT Authentication", "Payment Integration", "WebSockets"]
+    "Tools & Platforms": ["Git", "Docker", "AWS", "CI/CD", "Jest", "Webpack", "Nginx"],
+    "Professional Skills": ["Agile/Scrum", "Microservices", "JWT Authentication", "Payment Integration", "WebSockets"]
   };
 
   const projects = [
@@ -1105,12 +1106,6 @@ const ProfessionalCV = () => {
       description: "Healthcare platform with appointment scheduling, patient records, and telemedicine features",
       technologies: "Angular, Spring Boot, PostgreSQL, WebRTC",
       link: "github.com/j10mo/doctor-app"
-    },
-    {
-      name: "StyleH Electronics Store",
-      description: "E-commerce platform with inventory management and secure payment processing",
-      technologies: "React, Express, MongoDB, Stripe, Redis",
-      link: "github.com/j10mo/electronics-store"
     }
   ];
 
@@ -1128,27 +1123,78 @@ const ProfessionalCV = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* Print Styles */}
+      {/* Enhanced Print Styles */}
       <style jsx>{`
         @media print {
+          @page {
+            margin: 0.5in;
+            size: letter;
+          }
+          
           .no-print {
             display: none !important;
           }
-          .print-break {
+          
+          .print-break-before {
             page-break-before: always;
           }
+          
+          .print-break-after {
+            page-break-after: always;
+          }
+          
           .print-break-inside {
             page-break-inside: avoid;
           }
+          
+          .print-no-break {
+            page-break-inside: avoid;
+          }
+          
           body {
             print-color-adjust: exact;
             -webkit-print-color-adjust: exact;
+            background: white !important;
           }
+          
           .print-shadow {
             box-shadow: none !important;
           }
+          
           .print-border {
-            border-color: #000 !important;
+            border-color: #2c5282 !important;
+          }
+          
+          .print-bg {
+            background: transparent !important;
+          }
+          
+          .print-text-gray {
+            color: #4a5568 !important;
+          }
+          
+          .print-text-dark {
+            color: #2d3748 !important;
+          }
+          
+          .print-section-border {
+            border-bottom-color: #cbd5e0 !important;
+          }
+          
+          a {
+            text-decoration: none !important;
+            color: #2c5282 !important;
+          }
+          
+          .print-contact-bar {
+            background: #f7fafc !important;
+            border: 1px solid #e2e8f0 !important;
+          }
+        }
+        
+        @media screen {
+          .print-layout {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
           }
         }
       `}</style>
@@ -1157,83 +1203,80 @@ const ProfessionalCV = () => {
       <div className="no-print fixed top-6 right-6 z-50">
         <button
           onClick={() => window.print()}
-          className="flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          className="flex items-center px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border border-gray-600"
         >
           <Download size={18} className="mr-2" />
           Download CV
         </button>
       </div>
 
-      <div className="max-w-5xl mx-auto p-8 bg-white">
+      <div className="max-w-5xl mx-auto p-8 bg-white print-layout">
         {/* Header */}
-        <header className="border-b-4 border-blue-600 pb-8 mb-8 print-border">
+        <header className="border-b-2 border-gray-800 pb-6 mb-8 print-border print-no-break">
           <div className="text-center mb-6">
-            <h1 className="text-5xl font-bold text-gray-900 mb-3 tracking-tight">{contactInfo.name}</h1>
-            <p className="text-2xl text-blue-600 font-semibold mb-4">{contactInfo.title}</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-3 tracking-tight print-text-dark">{contactInfo.name}</h1>
+            <p className="text-xl text-gray-700 font-medium mb-6 print-text-gray">{contactInfo.title}</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
-            <div className="flex items-center justify-center md:justify-start">
-              <Mail size={18} className="mr-3 text-blue-600" />
-              <a href={`mailto:${contactInfo.email}`} className="hover:text-blue-600 transition-colors">
-                {contactInfo.email}
-              </a>
-            </div>
-            <div className="flex items-center justify-center">
-              <Phone size={18} className="mr-3 text-blue-600" />
-              <a href={`tel:${contactInfo.phone}`} className="hover:text-blue-600 transition-colors">
-                {contactInfo.phone}
-              </a>
-            </div>
-            <div className="flex items-center justify-center md:justify-end">
-              <MapPin size={18} className="mr-3 text-blue-600" />
-              <span>{contactInfo.location}</span>
-            </div>
-            <div className="flex items-center justify-center md:justify-start">
-              <Github size={18} className="mr-3 text-blue-600" />
-              <a href={`https://${contactInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
-                {contactInfo.github}
-              </a>
-            </div>
-            <div className="flex items-center justify-center md:justify-end col-span-2">
-              <Linkedin size={18} className="mr-3 text-blue-600" />
-              <a href={`https://${contactInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
-                {contactInfo.linkedin}
-              </a>
+          {/* Contact Bar */}
+          <div className="bg-gray-50 p-4 rounded-lg print-contact-bar print-bg">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+              <div className="flex items-center justify-center">
+                <Mail size={16} className="mr-2 text-gray-600" />
+                <a href={`mailto:${contactInfo.email}`} className="text-gray-700 hover:text-gray-900 print-text-gray">
+                  {contactInfo.email}
+                </a>
+              </div>
+              <div className="flex items-center justify-center">
+                <Phone size={16} className="mr-2 text-gray-600" />
+                <span className="text-gray-700 print-text-gray">{contactInfo.phone}</span>
+              </div>
+              <div className="flex items-center justify-center">
+                <MapPin size={16} className="mr-2 text-gray-600" />
+                <span className="text-gray-700 print-text-gray">{contactInfo.location}</span>
+              </div>
+              <div className="flex items-center justify-center">
+                <Github size={16} className="mr-2 text-gray-600" />
+                <span className="text-gray-700 print-text-gray">{contactInfo.github}</span>
+              </div>
+              <div className="flex items-center justify-center md:col-span-2">
+                <Linkedin size={16} className="mr-2 text-gray-600" />
+                <span className="text-gray-700 print-text-gray">{contactInfo.linkedin}</span>
+              </div>
             </div>
           </div>
         </header>
 
         {/* Professional Summary */}
-        <section className="mb-10 print-break-inside">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-gray-200 print-border">
-            Professional Summary
+        <section className="mb-8 print-break-inside">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+            PROFESSIONAL SUMMARY
           </h2>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-gray-700 leading-relaxed text-lg print-text-gray">
             {summary}
           </p>
         </section>
 
         {/* Professional Experience */}
-        <section className="mb-10 print-break-inside">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-gray-200 print-border">
-            Professional Experience
+        <section className="mb-8 print-break-inside">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+            PROFESSIONAL EXPERIENCE
           </h2>
           {experience.map((job, index) => (
-            <div key={index} className="mb-8 last:mb-0 p-4 rounded-lg hover:bg-gray-50 transition-colors print-shadow">
+            <div key={index} className="mb-6 last:mb-0 print-no-break">
               <div className="flex flex-col md:flex-row justify-between items-start mb-3">
                 <div className="mb-2 md:mb-0">
-                  <h3 className="text-xl font-semibold text-gray-900">{job.title}</h3>
-                  <p className="text-gray-700 font-medium">{job.company} • {job.location}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 print-text-dark">{job.title}</h3>
+                  <p className="text-gray-700 print-text-gray">{job.company} • {job.location}</p>
                 </div>
-                <span className="text-sm text-blue-600 font-semibold flex items-center bg-blue-50 px-3 py-1 rounded-full">
+                <span className="text-sm text-gray-600 font-medium flex items-center print-text-gray">
                   <Calendar size={14} className="mr-1" />
                   {job.period}
                 </span>
               </div>
-              <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
+              <ul className="list-disc list-inside text-gray-700 space-y-1 ml-4 print-text-gray">
                 {job.responsibilities.map((resp, idx) => (
-                  <li key={idx} className="text-base leading-relaxed">{resp}</li>
+                  <li key={idx} className="text-sm leading-relaxed">{resp}</li>
                 ))}
               </ul>
             </div>
@@ -1241,41 +1284,41 @@ const ProfessionalCV = () => {
         </section>
 
         {/* Education */}
-        <section className="mb-10 print-break-inside">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-gray-200 print-border">
-            Education
+        <section className="mb-8 print-break-inside">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+            EDUCATION
           </h2>
           {education.map((edu, index) => (
-            <div key={index} className="mb-6 last:mb-0 p-4 rounded-lg hover:bg-gray-50 transition-colors print-shadow">
-              <div className="flex flex-col md:flex-row justify-between items-start mb-2">
+            <div key={index} className="mb-4 last:mb-0 print-no-break">
+              <div className="flex flex-col md:flex-row justify-between items-start mb-1">
                 <div className="mb-2 md:mb-0">
-                  <h3 className="text-xl font-semibold text-gray-900">{edu.degree}</h3>
-                  <p className="text-gray-700 font-medium">{edu.institution} • {edu.location}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 print-text-dark">{edu.degree}</h3>
+                  <p className="text-gray-700 print-text-gray">{edu.institution} • {edu.location}</p>
                 </div>
-                <span className="text-sm text-blue-600 font-semibold flex items-center bg-blue-50 px-3 py-1 rounded-full">
+                <span className="text-sm text-gray-600 font-medium flex items-center print-text-gray">
                   <Calendar size={14} className="mr-1" />
                   {edu.period}
                 </span>
               </div>
-              <p className="text-gray-600 ml-4">{edu.details}</p>
+              <p className="text-sm text-gray-600 ml-0 print-text-gray">{edu.details}</p>
             </div>
           ))}
         </section>
 
         {/* Technical Skills */}
-        <section className="mb-10 print-break-inside">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-gray-200 print-border">
-            Technical Skills
+        <section className="mb-8 print-break-before print-break-inside">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+            TECHNICAL SKILLS
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
             {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="bg-gray-50 p-4 rounded-lg print-shadow">
-                <h4 className="font-semibold text-gray-900 mb-3 text-lg">{category}</h4>
-                <div className="flex flex-wrap gap-2">
+              <div key={category} className="print-no-break">
+                <h4 className="font-semibold text-gray-900 mb-2 print-text-dark">{category}:</h4>
+                <div className="flex flex-wrap gap-2 ml-4">
                   {items.map((skill, idx) => (
                     <span 
                       key={idx} 
-                      className="inline-block bg-white px-3 py-1 rounded-full text-sm text-gray-700 border border-gray-200 shadow-sm"
+                      className="inline-block bg-gray-100 px-3 py-1 rounded text-sm text-gray-700 border border-gray-300 print-bg print-text-gray print-border"
                     >
                       {skill}
                     </span>
@@ -1286,69 +1329,59 @@ const ProfessionalCV = () => {
           </div>
         </section>
 
-        {/* Key Projects - Page Break for Print */}
-        <section className="mb-10 print-break">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-gray-200 print-border">
-            Key Projects
+        {/* Key Projects */}
+        <section className="mb-8 print-break-inside">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+            KEY PROJECTS
           </h2>
-          <div className="grid grid-cols-1 gap-6">
+          <div className="space-y-4">
             {projects.map((project, index) => (
               <div 
                 key={index} 
-                className="border-l-4 border-blue-500 pl-5 py-3 bg-gray-50 rounded-r-lg hover:bg-white transition-all duration-300 print-shadow"
+                className="border-l-2 border-gray-400 pl-4 py-2 print-no-break print-border"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-xl font-semibold text-gray-900 flex items-center">
+                <div className="flex items-start justify-between mb-1">
+                  <h3 className="text-lg font-semibold text-gray-900 print-text-dark">
                     {project.name}
                   </h3>
-                  <a 
-                    href={`https://${project.link}`} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center text-blue-600 hover:text-blue-700 transition-colors ml-2"
-                  >
-                    <ExternalLink size={16} className="mr-1" />
-                    Visit
-                  </a>
+                  <span className="text-xs text-gray-500 print-text-gray">Live Demo</span>
                 </div>
-                <p className="text-gray-700 mb-2 leading-relaxed">{project.description}</p>
-                <p className="text-sm text-gray-600">
-                  <span className="font-semibold">Technologies:</span> {project.technologies}
+                <p className="text-gray-700 mb-2 text-sm print-text-gray">{project.description}</p>
+                <p className="text-sm text-gray-600 print-text-gray">
+                  <span className="font-medium">Technologies:</span> {project.technologies}
                 </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Certifications & Languages Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 print-break-inside">
+        {/* Certifications & Languages */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 print-break-inside">
           {/* Certifications */}
-          <section>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-gray-200 print-border">
-              Certifications & Training
+          <section className="print-no-break">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+              CERTIFICATIONS
             </h2>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {certifications.map((cert, index) => (
                 <li key={index} className="flex items-start">
-                  <Award size={18} className="text-blue-600 mr-3 mt-1 flex-shrink-0" />
-                  <span className="text-gray-700">{cert}</span>
+                  <Award size={16} className="text-gray-600 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 print-text-gray">{cert}</span>
                 </li>
               ))}
             </ul>
           </section>
 
           {/* Languages */}
-          <section>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-gray-200 print-border">
-              Languages
+          <section className="print-no-break">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+              LANGUAGES
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {languages.map((lang, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg print-shadow">
-                  <span className="font-semibold text-gray-900 text-lg">{lang.language}</span>
-                  <span className="text-blue-600 font-medium bg-white px-3 py-1 rounded-full text-sm">
-                    {lang.level}
-                  </span>
+                <div key={index} className="flex justify-between items-center">
+                  <span className="font-medium text-gray-900 print-text-dark">{lang.language}</span>
+                  <span className="text-sm text-gray-600 print-text-gray">{lang.level}</span>
                 </div>
               ))}
             </div>
@@ -1356,34 +1389,21 @@ const ProfessionalCV = () => {
         </div>
 
         {/* Achievements */}
-        <section className="mb-10 print-break-inside">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-gray-200 print-border">
-            Key Achievements
+        <section className="mb-8 print-break-inside">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-300 print-section-border print-text-dark">
+            KEY ACHIEVEMENTS
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-100 print-shadow">
-              <h4 className="font-semibold text-blue-900 mb-2">Project Delivery</h4>
-              <p className="text-gray-700">Successfully delivered 50+ web applications with 100% client satisfaction rate</p>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-lg border border-green-100 print-shadow">
-              <h4 className="font-semibold text-green-900 mb-2">Open Source</h4>
-              <p className="text-gray-700">Achieved 500+ GitHub stars across personal open-source projects</p>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-4 rounded-lg border border-purple-100 print-shadow">
-              <h4 className="font-semibold text-purple-900 mb-2">Performance</h4>
-              <p className="text-gray-700">Reduced application load time by 60% through optimization techniques</p>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-red-50 p-4 rounded-lg border border-orange-100 print-shadow">
-              <h4 className="font-semibold text-orange-900 mb-2">Financial Systems</h4>
-              <p className="text-gray-700">Implemented secure payment systems processing $1M+ in transactions</p>
-            </div>
-          </div>
+          <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4 print-text-gray">
+            <li className="text-sm">Successfully delivered 50+ web applications with 100% client satisfaction rate</li>
+            <li className="text-sm">Achieved 500+ GitHub stars across personal open-source projects</li>
+            <li className="text-sm">Reduced application load time by 60% through optimization techniques</li>
+            <li className="text-sm">Implemented secure payment systems processing $1M+ in transactions</li>
+          </ul>
         </section>
 
         {/* Footer */}
-        <footer className="mt-12 pt-8 border-t-2 border-gray-300 text-center text-gray-600 print-border">
-          <p className="text-lg">References available upon request</p>
-          <p className="text-sm mt-2">Last updated: {new Date().toLocaleDateString()}</p>
+        <footer className="mt-12 pt-6 border-t border-gray-300 text-center text-gray-600 text-sm print-border print-text-gray">
+          <p>References available upon request • Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         </footer>
       </div>
     </div>
