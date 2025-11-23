@@ -1021,7 +1021,7 @@ const ProfessionalCV = () => {
     name: "Jasem Mohammed",
     title: "Senior Web Developer",
     email: "jasem2000704@gmail.com",
-    phone: "+964 123 456 7890",
+    phone: "+964 7717288459",
     location: "Baghdad, Iraq",
     github: "github.com/j10mo",
     linkedin: "linkedin.com/in/jasem-mohammed",
